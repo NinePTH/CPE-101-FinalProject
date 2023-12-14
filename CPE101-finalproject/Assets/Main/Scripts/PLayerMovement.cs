@@ -16,20 +16,20 @@ public class PLayerMovement : MonoBehaviour
 
     public Animator at;
 
-    Vector2 movement;
+    public Vector2 movement;
 
     // Update is called once per frame
     void Update()
     {
         //input
-         horizontal = Input.GetAxis("Horizontal");
-         vertical = Input.GetAxis("Vertical");
+         horizontal = Input.GetAxisRaw("Horizontal");
+         vertical = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
     {
         //movement
-        Vector2 movement = new Vector2(horizontal, vertical);
+        movement = new Vector2(horizontal, vertical).normalized;
         rb.MovePosition(rb.position + movement * Speed * Time.fixedDeltaTime);
         if (horizontal < 0)
         {
