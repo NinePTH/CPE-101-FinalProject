@@ -7,20 +7,24 @@ public class EnemyMovement : MonoBehaviour
     public float speed;
     public Rigidbody2D target;
 
-    bool isLive = true;
+    public bool isLive;
 
     Rigidbody2D rigid;
     SpriteRenderer spriter;
+    Animator animator;
+    Collider2D coll;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        coll = GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()
     {
-        if (!isLive)
+        if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
         Vector2 dirVec = target.position - rigid.position;
@@ -40,5 +44,9 @@ public class EnemyMovement : MonoBehaviour
     private void OnEnable()
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
+        isLive = true;
+        coll.enabled = true;
+        rigid.simulated = true;
+        spriter.sortingOrder = 2;
     }
 }
