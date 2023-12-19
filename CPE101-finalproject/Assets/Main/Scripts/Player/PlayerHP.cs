@@ -6,11 +6,13 @@ public class PlayerHP : MonoBehaviour
 {
     [SerializeField] private float maxHP;
     public float currentHP;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHP = maxHP;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,7 +34,13 @@ public class PlayerHP : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        animator.SetTrigger("Dead");
+        GameManager.instance.GameOver();
+        for (int index = 3; index < transform.childCount; index++)
+        {
+            transform.GetChild(index).gameObject.SetActive(false);
+        }
+        //Destroy(gameObject);
         Debug.Log("Die");
     }
 }
