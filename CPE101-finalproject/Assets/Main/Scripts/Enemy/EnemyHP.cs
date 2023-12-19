@@ -24,7 +24,6 @@ public class EnemyHP : MonoBehaviour
         EnemyMovementScript = GetComponent<EnemyMovement>();
         coll = GetComponent<Collider2D>();
         spriter = GetComponent<SpriteRenderer>();
-        animator.SetBool("Dead", false);
     }
 
 
@@ -39,7 +38,7 @@ public class EnemyHP : MonoBehaviour
             rigid.simulated = false;
             spriter.sortingOrder = 1;
             currentHP = 0;
-            Die();
+            Invoke("Die",0.1f);
 
         }
         else
