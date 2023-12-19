@@ -38,6 +38,7 @@ public class EnemyHP : MonoBehaviour
             rigid.simulated = false;
             spriter.sortingOrder = 1;
             currentHP = 0;
+            GameObject.Find("KillText").GetComponent<HUD>().addKill();
             Invoke("Die",0.1f);
 
         }
