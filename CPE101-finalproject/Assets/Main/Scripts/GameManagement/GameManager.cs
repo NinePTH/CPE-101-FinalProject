@@ -15,8 +15,15 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    public void GameStart()
+    {
+        AudioManager.instance.PlayBgm(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+    }
+
     public void GameOver()
     {
+        //player.gameObject.SetActive(true);
         StartCoroutine(GameOverRoutine());
     }
 
@@ -25,14 +32,19 @@ public class GameManager : MonoBehaviour
         //isLive = false;
         player.enabled = false;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
         uiResult.SetActive(true);
         Time.timeScale = 0;
+
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
 
     public void Restart()
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 }

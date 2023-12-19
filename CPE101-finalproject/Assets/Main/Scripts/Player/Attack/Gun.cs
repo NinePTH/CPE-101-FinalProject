@@ -22,6 +22,7 @@ public class Gun : MonoBehaviour
         {
             Shoot();
             nextFire = Time.time + fireRate;
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
         }
     }
 

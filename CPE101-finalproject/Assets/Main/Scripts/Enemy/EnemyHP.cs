@@ -40,11 +40,13 @@ public class EnemyHP : MonoBehaviour
             currentHP = 0;
             GameObject.Find("KillText").GetComponent<HUD>().addKill();
             Invoke("Die",0.1f);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
 
         }
         else
         {
             animator.SetTrigger("Hit");
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
         }
     }
 
