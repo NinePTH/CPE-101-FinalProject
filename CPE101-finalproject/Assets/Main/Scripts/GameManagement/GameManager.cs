@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        
+    }
+
     public void GameStart()
     {
         AudioManager.instance.PlayBgm(true);

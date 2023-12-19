@@ -13,6 +13,8 @@ public class HUD : MonoBehaviour
     int _currWave;
     public float kill;
 
+    PlayerHP playerHP;
+
     Text myText;
     Slider mySlider;
 
@@ -25,6 +27,8 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
+        waveSpawner = GameObject.FindGameObjectWithTag("WaveSpawner").GetComponent<WaveSpawner>();
+        playerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHP>();
         _currWave = waveSpawner.currWave;
         //currWave.text = _currWave.ToString();
     }
@@ -37,7 +41,9 @@ public class HUD : MonoBehaviour
 
                 break;
             case InfoType.Health:
-
+                float curHealth = playerHP.currentHP;
+                float maxHealth = playerHP.maxHP;
+                mySlider.value = curHealth / maxHealth;
                 break;
             case InfoType.Kill:
                 myText.text = string.Format("{0:F0}", kill.ToString());
